@@ -1234,7 +1234,7 @@
 
 "@prisma/client@^6.6.0":
   version "6.6.0"
-  resolved "https://registry.npmjs.org/@prisma/client/-/client-6.6.0.tgz"
+  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-6.6.0.tgz#21e8cf507091b6cffc8453970f782cb6adef0004"
   integrity sha512-vfp73YT/BHsWWOAuthKQ/1lBgESSqYqAWZEYyTdGXyFAHpmewwWL2Iz6ErIzkj4aHbuc6/cGSsE6ZY+pBO04Cg==
 
 "@prisma/config@6.6.0":
