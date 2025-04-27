@@ -1,0 +1,47 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UserService = void 0;
+const common_1 = require("@nestjs/common");
+const client_1 = require("@prisma/client");
+let UserService = class UserService {
+    prisma = new client_1.PrismaClient();
+    selectInfoUser = {
+        user_fullname: true,
+        user_email: true,
+        user_phone: true,
+        user_birthDate: true,
+        user_role: true,
+        user_address: true
+    };
+    async getListUser() {
+        try {
+            const users = await this.prisma.user.findMany({
+                select: {
+                    user_id: true,
+                    user_fullname: true,
+                    user_email: true,
+                    user_password: true,
+                    user_phone: true,
+                    user_birthDate: true,
+                    user_role: true,
+                    user_address: true
+                },
+            });
+            return { users };
+        }
+        catch (err) {
+            throw new Error(`Error getting users: ${err}`);
+        }
+    }
+};
+exports.UserService = UserService;
+exports.UserService = UserService = __decorate([
+    (0, common_1.Injectable)()
+], UserService);
+//# sourceMappingURL=user.service.js.map
