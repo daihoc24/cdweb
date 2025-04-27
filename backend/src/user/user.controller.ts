@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -16,4 +16,12 @@ import { Response } from 'express';
     });
   }
 
+  @Get('/UserInformation/:userId')
+  // @UseGuards(JwtAuthGuard)
+  async getUserInfor(@Param('userId') userId: number, @Res() res: Response) {
+    res.send({
+      message: 'Xử lí thành công!',
+      content: ((await this.userService.getUserInfor(+userId)).data)
+    });
+  }
 }
