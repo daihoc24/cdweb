@@ -21,4 +21,14 @@ export declare class UserService {
             user_id: number;
         }[];
     }>;
+    getUserInfor(userId: number): Promise<{
+        data: {
+            user_fullname: string | null;
+            user_email: string | null;
+            user_phone: string | null;
+            user_birthDate: Date | null;
+            user_role: string | null;
+            user_address: string | null;
+        } | null;
+    }>;
 }

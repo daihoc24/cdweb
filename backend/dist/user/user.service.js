@@ -39,6 +39,20 @@ let UserService = class UserService {
             throw new Error(`Error getting users: ${err}`);
         }
     }
+    async getUserInfor(userId) {
+        try {
+            const data = await this.prisma.user.findUnique({
+                select: this.selectInfoUser,
+                where: {
+                    user_id: userId,
+                },
+            });
+            return { data };
+        }
+        catch (error) {
+            throw new Error(`Error fetching user info: ${error}`);
+        }
+    }
 };
 exports.UserService = UserService;
 exports.UserService = UserService = __decorate([

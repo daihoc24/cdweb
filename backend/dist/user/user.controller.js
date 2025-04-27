@@ -27,6 +27,12 @@ let UserController = class UserController {
             content: ((await this.userService.getListUser()).users)
         });
     }
+    async getUserInfor(userId, res) {
+        res.send({
+            message: 'Xử lí thành công!',
+            content: ((await this.userService.getUserInfor(+userId)).data)
+        });
+    }
 };
 exports.UserController = UserController;
 __decorate([
@@ -36,6 +42,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getListUser", null);
+__decorate([
+    (0, common_1.Get)('/UserInformation/:userId'),
+    __param(0, (0, common_1.Param)('userId')),
+    __param(1, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getUserInfor", null);
 exports.UserController = UserController = __decorate([
     (0, swagger_1.ApiTags)('User'),
     (0, common_1.Controller)('api/User'),

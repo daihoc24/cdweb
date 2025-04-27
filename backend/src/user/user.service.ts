@@ -38,4 +38,17 @@ export class UserService {
     }
   }
 
+  async getUserInfor(userId: number) {
+    try {
+      const data = await this.prisma.user.findUnique({
+        select: this.selectInfoUser,
+        where: {
+          user_id: userId,
+        },
+      });
+      return { data };
+    } catch (error) {
+      throw new Error(`Error fetching user info: ${error}`);
+    }
+  }
 }
