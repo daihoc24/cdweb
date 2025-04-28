@@ -53,6 +53,21 @@ let UserService = class UserService {
             throw new Error(`Error fetching user info: ${error}`);
         }
     }
+    async createUser(body) {
+        const { ...userData } = body;
+        const passBcrypt = await bcrypt.hash(userData.user_password, 10);
+        const checkEmail = await this.prisma.user.findFirst({
+            where: {
+                user_email: userData.user_email,
+            },
+        });
+        if (checkEmail) {
+            return {
+                status: 400,
+                message: 'Email đã tồn tại.',
+            };
+        }
+    }
 };
 exports.UserService = UserService;
 exports.UserService = UserService = __decorate([

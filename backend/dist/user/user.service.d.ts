@@ -1,3 +1,4 @@
+import { CreateUserDto } from './dto/create-user.dto';
 import { PrismaClient } from '@prisma/client';
 export declare class UserService {
     prisma: PrismaClient<import(".prisma/client").Prisma.PrismaClientOptions, never, import("@prisma/client/runtime/library").DefaultArgs>;
@@ -31,4 +32,8 @@ export declare class UserService {
             user_address: string | null;
         } | null;
     }>;
+    createUser(body: CreateUserDto): Promise<{
+        status: number;
+        message: string;
+    } | undefined>;
 }

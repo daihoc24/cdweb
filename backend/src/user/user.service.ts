@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaClient } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
 @Injectable()
 export class UserService {
   prisma = new PrismaClient();
@@ -38,6 +39,7 @@ export class UserService {
     }
   }
 
+  // Lấy thông tin của người dùng theo id (user_id)
   async getUserInfor(userId: number) {
     try {
       const data = await this.prisma.user.findUnique({
@@ -49,6 +51,22 @@ export class UserService {
       return { data };
     } catch (error) {
       throw new Error(`Error fetching user info: ${error}`);
+    }
+  }
+  // Tạo người dùng mới
+  async createUser(body: CreateUserDto) {
+    const { ...userData } = body;
+    const passBcrypt: string = await bcrypt.hash(userData.user_password, 10);
+    const checkEmail = await this.prisma.user.findFirst({
+      where: {
+        user_email: userData.user_email,
+      },
+    });
+    if (checkEmail) {
+      return {
+        status: 400,
+        message: 'Email đã tồn tại.',
+      };
     }
   }
 }

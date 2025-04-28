@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
+const create_user_dto_1 = require("./dto/create-user.dto");
 const swagger_1 = require("@nestjs/swagger");
 let UserController = class UserController {
     userService;
@@ -31,6 +32,12 @@ let UserController = class UserController {
         res.send({
             message: 'Xử lí thành công!',
             content: ((await this.userService.getUserInfor(+userId)).data)
+        });
+    }
+    async creatUser(CreateUserDto, req, res) {
+        res.send({
+            message: 'Xử lí thành công!',
+            content: ((await this.userService.createUser(CreateUserDto)))
         });
     }
 };
@@ -50,6 +57,16 @@ __decorate([
     __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getUserInfor", null);
+__decorate([
+    (0, common_1.Post)('/creatUser'),
+    (0, swagger_1.ApiBearerAuth)(),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Req)()),
+    __param(2, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto, Object, Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "creatUser", null);
 exports.UserController = UserController = __decorate([
     (0, swagger_1.ApiTags)('User'),
     (0, common_1.Controller)('api/User'),
