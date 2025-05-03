@@ -68,5 +68,38 @@ export class UserService {
         message: 'Email đã tồn tại.',
       };
     }
+
+    // Tạo mới User
+    const createdUser = await this.prisma.user.create({
+      data: {
+        ...userData,
+        user_password: passBcrypt,
+        is_verified: true,
+      },
+    });
+    return createdUser;
+  }
+
+  // Cập nhật thông tin người dùng
+  async updateUser(userId: number, body: UpdateUserDto) {
+    const { ...userData } = body;
+    if (userData.user_password) {
+      const hashedPassword = await bcrypt.hash(userData.user_password, 10);
+      const updatedUser = await this.prisma.user.update({
+        where: { user_id: userId },
+        data: {
+          ...userData,
+          user_password: hashedPassword
+        },
+      });
+      return updatedUser;
+    }
+    const updatedUser = await this.prisma.user.update({
+      where: { user_id: userId },
+      data: {
+        ...userData,
+      },
+    });
+    return updatedUser;
   }
 }

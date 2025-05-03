@@ -25,6 +25,7 @@ import { getData } from './interface';
       content: ((await this.userService.getUserInfor(+userId)).data)
     });
   }
+
   @Post('/creatUser')
   @ApiBearerAuth()
   // @UseGuards(JwtAuthGuard)
@@ -37,5 +38,20 @@ import { getData } from './interface';
       content: ((await this.userService.createUser(CreateUserDto)))
     });    // }
     // throw new UnauthorizedException('Bạn không có quyền hạn truy cập!');
+  }
+  @Post('/update-password/:userId')
+  @UseGuards(JwtAuthGuard)
+  async updatePassword(
+    @Body() updatePasswordDto: UpdatePasswordDto,
+    @Param('userId') userId: number,
+    @Req() req: any,
+    @Res() res: Response
+  ) {
+    // Gọi service để thay đổi mật khẩu
+    const updatedUser = await this.userService.updatePassword(+userId, updatePasswordDto);
+    return res.status(200).json({
+      message: 'Password updated successfully',
+      content: updatedUser,
+    });
   }
 }
