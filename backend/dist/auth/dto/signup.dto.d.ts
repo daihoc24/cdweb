@@ -1,0 +1,8 @@
+export declare class signupDTO {
+    user_fullname: string;
+    user_email: string;
+    user_password: string;
+    user_phone: string;
+    user_birthDate: Date;
+    user_address: string;
+}
