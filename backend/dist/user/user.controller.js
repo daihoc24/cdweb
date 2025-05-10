@@ -16,6 +16,7 @@ exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
 const create_user_dto_1 = require("./dto/create-user.dto");
+const update_user_dto_1 = require("./dto/update-user.dto");
 const swagger_1 = require("@nestjs/swagger");
 let UserController = class UserController {
     userService;
@@ -38,6 +39,32 @@ let UserController = class UserController {
         res.send({
             message: 'Xử lí thành công!',
             content: ((await this.userService.createUser(CreateUserDto)))
+        });
+    }
+    async updatePassword(updatePasswordDto, userId, req, res) {
+        const updatedUser = await this.userService.updatePassword(+userId, updatePasswordDto);
+        return res.status(200).json({
+            message: 'Password updated successfully',
+            content: updatedUser,
+        });
+    }
+    async updateUser(userId, body, req, res) {
+        res.send({
+            message: 'Xử lí thành công!',
+            content: ((await this.userService.updateUser(+userId, body)))
+        });
+        throw new common_1.UnauthorizedException('Bạn không có quyền truy cập!');
+    }
+    deleteUser(userId, req) {
+        if (req.user.role === 'admin') {
+            return this.userService.deleteUser(+userId);
+        }
+        throw new common_1.UnauthorizedException('Bạn không có quyền truy cập!');
+    }
+    async searchUserByName(res, name) {
+        res.send({
+            message: 'Xử lí thành công!',
+            content: (await this.userService.searchUserByName(name))?.data,
         });
     }
 };
@@ -67,6 +94,44 @@ __decorate([
     __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto, Object, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "creatUser", null);
+__decorate([
+    (0, common_1.Post)('/update-password/:userId'),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Param)('userId')),
+    __param(2, (0, common_1.Req)()),
+    __param(3, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Number, Object, Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "updatePassword", null);
+__decorate([
+    (0, common_1.Put)('/UpdateUser/:userId'),
+    (0, swagger_1.ApiBearerAuth)(),
+    __param(0, (0, common_1.Param)('userId')),
+    __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.Req)()),
+    __param(3, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, update_user_dto_1.UpdateUserDto, Object, Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "updateUser", null);
+__decorate([
+    (0, common_1.Delete)('/DeleteUser/:userId'),
+    (0, swagger_1.ApiBearerAuth)(),
+    __param(0, (0, common_1.Param)('userId')),
+    __param(1, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Object]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "deleteUser", null);
+__decorate([
+    (0, common_1.Get)('/searchUserByName'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Query)('name')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "searchUserByName", null);
 exports.UserController = UserController = __decorate([
     (0, swagger_1.ApiTags)('User'),
     (0, common_1.Controller)('api/User'),

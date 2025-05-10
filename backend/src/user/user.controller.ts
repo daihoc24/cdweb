@@ -5,7 +5,11 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { getData } from './interface';
-
+import { JwtAuthGuard } from 'src/auth/authGuard';
+interface UpdatePasswordDto {
+  currentPassword: string;
+  newPassword: string;
+}
 @ApiTags('User')
 @Controller('api/User') export class UserController {
   constructor(private readonly userService: UserService) { }
@@ -18,7 +22,7 @@ import { getData } from './interface';
   }
 
   @Get('/UserInformation/:userId')
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   async getUserInfor(@Param('userId') userId: number, @Res() res: Response) {
     res.send({
       message: 'Xử lí thành công!',
@@ -28,7 +32,7 @@ import { getData } from './interface';
 
   @Post('/creatUser')
   @ApiBearerAuth()
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   async creatUser(@Body() CreateUserDto: CreateUserDto,
     @Req() req: getData, @Res() res: Response
   ) {
@@ -40,14 +44,13 @@ import { getData } from './interface';
     // throw new UnauthorizedException('Bạn không có quyền hạn truy cập!');
   }
   @Post('/update-password/:userId')
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   async updatePassword(
-    @Body() updatePasswordDto: UpdatePasswordDto ,
+    @Body() updatePasswordDto: UpdatePasswordDto,
     @Param('userId') userId: number,
     @Req() req: any,
     @Res() res: Response
   ): Promise<Response<any, Record<string, any>>> {
-    // Gọi service để thay đổi mật khẩu
     const updatedUser = await this.userService.updatePassword(+userId, updatePasswordDto);
     return res.status(200).json({
       message: 'Password updated successfully',
@@ -56,7 +59,7 @@ import { getData } from './interface';
   }
   @Put('/UpdateUser/:userId')
   @ApiBearerAuth()
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   async updateUser(
     @Param('userId') userId: string,
     @Body() body: UpdateUserDto,
@@ -72,7 +75,7 @@ import { getData } from './interface';
   }
   @Delete('/DeleteUser/:userId')
   @ApiBearerAuth()
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   deleteUser(@Param('userId') userId: number,
     @Req() req: getData
   ) {
