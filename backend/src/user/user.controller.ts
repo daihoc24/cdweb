@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, UseGuards, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, UseGuards, Req, UnauthorizedException, Query, Put } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -40,18 +40,52 @@ import { getData } from './interface';
     // throw new UnauthorizedException('Bạn không có quyền hạn truy cập!');
   }
   @Post('/update-password/:userId')
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   async updatePassword(
-    @Body() updatePasswordDto: UpdatePasswordDto,
+    @Body() updatePasswordDto: UpdatePasswordDto ,
     @Param('userId') userId: number,
     @Req() req: any,
     @Res() res: Response
-  ) {
+  ): Promise<Response<any, Record<string, any>>> {
     // Gọi service để thay đổi mật khẩu
     const updatedUser = await this.userService.updatePassword(+userId, updatePasswordDto);
     return res.status(200).json({
       message: 'Password updated successfully',
       content: updatedUser,
+    });
+  }
+  @Put('/UpdateUser/:userId')
+  @ApiBearerAuth()
+  // @UseGuards(JwtAuthGuard)
+  async updateUser(
+    @Param('userId') userId: string,
+    @Body() body: UpdateUserDto,
+    @Req() req: getData,
+    @Res() res: Response
+  ) {
+    // if (req.user.role === 'admin') {
+    res.send({
+      message: 'Xử lí thành công!',
+      content: ((await this.userService.updateUser(+userId, body)))
+    });      // }
+    throw new UnauthorizedException('Bạn không có quyền truy cập!');
+  }
+  @Delete('/DeleteUser/:userId')
+  @ApiBearerAuth()
+  // @UseGuards(JwtAuthGuard)
+  deleteUser(@Param('userId') userId: number,
+    @Req() req: getData
+  ) {
+    if (req.user.role === 'admin') {
+      return this.userService.deleteUser(+userId);
+    }
+    throw new UnauthorizedException('Bạn không có quyền truy cập!');
+  }
+  @Get('/searchUserByName')
+  async searchUserByName(@Res() res: Response, @Query('name') name: string,) {
+    res.send({
+      message: 'Xử lí thành công!',
+      content: (await this.userService.searchUserByName(name))?.data,
     });
   }
 }

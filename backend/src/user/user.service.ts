@@ -3,6 +3,10 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaClient } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
+interface UpdatePasswordDto {
+  currentPassword: string;
+  newPassword: string;
+}
 @Injectable()
 export class UserService {
   prisma = new PrismaClient();
@@ -101,5 +105,61 @@ export class UserService {
       },
     });
     return updatedUser;
+  }
+  async updatePassword(userId: number, body: UpdatePasswordDto) {
+    const { currentPassword, newPassword } = body;
+
+    // Tìm người dùng trong cơ sở dữ liệu
+    const user = await this.prisma.user.findUnique({
+      where: { user_id: userId },
+    });
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    // Kiểm tra mật khẩu hiện tại
+    // const isMatch = await bcrypt.compare(currentPassword, user.user_password);
+    // if (!isMatch) {
+    //   throw new Error('Current password is incorrect');
+    // }
+
+    // Mã hóa mật khẩu mới
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Cập nhật mật khẩu mới vào cơ sở dữ liệu
+    const updatedUser = await this.prisma.user.update({
+      where: { user_id: userId },
+      data: {
+        user_password: hashedPassword,
+      },
+    });
+
+    return updatedUser;
+  }
+  // Xóa người dùng
+  async deleteUser(userId: number) {
+    try {
+      const data = await this.prisma.user.delete({
+        where: {
+          user_id: userId,
+        },
+      });
+      return { data };
+    } catch (err) {
+      throw new Error(`Error deleting user: ${err}`);
+    }
+  }
+  async searchUserByName(name: string) {
+    try {
+      const data = await this.prisma.user.findMany({
+        where: {
+          user_fullname: {
+            contains: name,
+          },
+        },
+      });
+      return { data };
+    } catch { }
   }
 }
