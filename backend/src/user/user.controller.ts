@@ -5,7 +5,10 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { getData } from './interface';
-
+interface UpdatePasswordDto {
+  currentPassword: string;
+  newPassword: string;
+}
 @ApiTags('User')
 @Controller('api/User') export class UserController {
   constructor(private readonly userService: UserService) { }
@@ -37,12 +40,12 @@ import { getData } from './interface';
       message: 'Xử lí thành công!',
       content: ((await this.userService.createUser(CreateUserDto)))
     });    // }
-    // throw new UnauthorizedException('Bạn không có quyền hạn truy cập!');
+    throw new UnauthorizedException('Bạn không có quyền hạn truy cập!');
   }
   @Post('/update-password/:userId')
   // @UseGuards(JwtAuthGuard)
   async updatePassword(
-    @Body() updatePasswordDto: UpdatePasswordDto ,
+    @Body() updatePasswordDto: UpdatePasswordDto,
     @Param('userId') userId: number,
     @Req() req: any,
     @Res() res: Response
