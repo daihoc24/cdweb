@@ -18,6 +18,7 @@ const user_service_1 = require("./user.service");
 const create_user_dto_1 = require("./dto/create-user.dto");
 const update_user_dto_1 = require("./dto/update-user.dto");
 const swagger_1 = require("@nestjs/swagger");
+const authGuard_1 = require("../auth/authGuard");
 let UserController = class UserController {
     userService;
     constructor(userService) {
@@ -40,6 +41,7 @@ let UserController = class UserController {
             message: 'Xử lí thành công!',
             content: ((await this.userService.createUser(CreateUserDto)))
         });
+        throw new common_1.UnauthorizedException('Bạn không có quyền hạn truy cập!');
     }
     async updatePassword(updatePasswordDto, userId, req, res) {
         const updatedUser = await this.userService.updatePassword(+userId, updatePasswordDto);
@@ -78,6 +80,7 @@ __decorate([
 ], UserController.prototype, "getListUser", null);
 __decorate([
     (0, common_1.Get)('/UserInformation/:userId'),
+    (0, common_1.UseGuards)(authGuard_1.JwtAuthGuard),
     __param(0, (0, common_1.Param)('userId')),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
@@ -87,6 +90,7 @@ __decorate([
 __decorate([
     (0, common_1.Post)('/creatUser'),
     (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(authGuard_1.JwtAuthGuard),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Req)()),
     __param(2, (0, common_1.Res)()),
@@ -96,6 +100,7 @@ __decorate([
 ], UserController.prototype, "creatUser", null);
 __decorate([
     (0, common_1.Post)('/update-password/:userId'),
+    (0, common_1.UseGuards)(authGuard_1.JwtAuthGuard),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Param)('userId')),
     __param(2, (0, common_1.Req)()),
@@ -107,6 +112,7 @@ __decorate([
 __decorate([
     (0, common_1.Put)('/UpdateUser/:userId'),
     (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(authGuard_1.JwtAuthGuard),
     __param(0, (0, common_1.Param)('userId')),
     __param(1, (0, common_1.Body)()),
     __param(2, (0, common_1.Req)()),
@@ -118,6 +124,7 @@ __decorate([
 __decorate([
     (0, common_1.Delete)('/DeleteUser/:userId'),
     (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(authGuard_1.JwtAuthGuard),
     __param(0, (0, common_1.Param)('userId')),
     __param(1, (0, common_1.Req)()),
     __metadata("design:type", Function),

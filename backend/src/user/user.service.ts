@@ -119,10 +119,10 @@ export class UserService {
     }
 
     // Kiểm tra mật khẩu hiện tại
-    // const isMatch = await bcrypt.compare(currentPassword, user.user_password);
-    // if (!isMatch) {
-    //   throw new Error('Current password is incorrect');
-    // }
+    const isMatch = await bcrypt.compare(currentPassword, user.user_password!);
+    if (!isMatch) {
+      throw new Error('Current password is incorrect');
+    }
 
     // Mã hóa mật khẩu mới
     const hashedPassword = await bcrypt.hash(newPassword, 10);
