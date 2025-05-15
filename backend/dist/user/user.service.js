@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const client_1 = require("@prisma/client");
+const bcrypt = require("bcrypt");
 let UserService = class UserService {
     prisma = new client_1.PrismaClient();
     selectInfoUser = {
@@ -67,6 +68,78 @@ let UserService = class UserService {
                 message: 'Email đã tồn tại.',
             };
         }
+        const createdUser = await this.prisma.user.create({
+            data: {
+                ...userData,
+                user_password: passBcrypt,
+                is_verified: true,
+            },
+        });
+        return createdUser;
+    }
+    async updateUser(userId, body) {
+        const { ...userData } = body;
+        if (userData.user_password) {
+            const hashedPassword = await bcrypt.hash(userData.user_password, 10);
+            const updatedUser = await this.prisma.user.update({
+                where: { user_id: userId },
+                data: {
+                    ...userData,
+                    user_password: hashedPassword
+                },
+            });
+            return updatedUser;
+        }
+        const updatedUser = await this.prisma.user.update({
+            where: { user_id: userId },
+            data: {
+                ...userData,
+            },
+        });
+        return updatedUser;
+    }
+    async updatePassword(userId, body) {
+        const { currentPassword, newPassword } = body;
+        const user = await this.prisma.user.findUnique({
+            where: { user_id: userId },
+        });
+        if (!user) {
+            throw new Error('User not found');
+        }
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        const updatedUser = await this.prisma.user.update({
+            where: { user_id: userId },
+            data: {
+                user_password: hashedPassword,
+            },
+        });
+        return updatedUser;
+    }
+    async deleteUser(userId) {
+        try {
+            const data = await this.prisma.user.delete({
+                where: {
+                    user_id: userId,
+                },
+            });
+            return { data };
+        }
+        catch (err) {
+            throw new Error(`Error deleting user: ${err}`);
+        }
+    }
+    async searchUserByName(name) {
+        try {
+            const data = await this.prisma.user.findMany({
+                where: {
+                    user_fullname: {
+                        contains: name,
+                    },
+                },
+            });
+            return { data };
+        }
+        catch { }
     }
 };
 exports.UserService = UserService;
