@@ -6,6 +6,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { getData } from './interface';
 import { JwtAuthGuard } from 'src/auth/authGuard';
+
 interface UpdatePasswordDto {
   currentPassword: string;
   newPassword: string;
@@ -41,7 +42,7 @@ interface UpdatePasswordDto {
       message: 'Xử lí thành công!',
       content: ((await this.userService.createUser(CreateUserDto)))
     });    // }
-    // throw new UnauthorizedException('Bạn không có quyền hạn truy cập!');
+    throw new UnauthorizedException('Bạn không có quyền hạn truy cập!');
   }
   @Post('/update-password/:userId')
   @UseGuards(JwtAuthGuard)
