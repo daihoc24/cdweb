@@ -11,7 +11,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   const config = new DocumentBuilder()
-    .setTitle('API TIEULUAN')
+    .setTitle('API CDWEB')
     .setVersion('V1')
     .addBearerAuth()
     .build();
