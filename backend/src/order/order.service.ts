@@ -8,12 +8,16 @@ import axios from 'axios';
 export class OrderService {
 
   prisma = new PrismaClient();
+  // Cho sẵn tọa độ tài xế hiện tại
   private driverLatitude: number = 10.88072665583552; // Tọa độ ban đầu của tài xế
   private driverLongitude: number = 106.78459883974683; // Tọa độ ban đầu của tài xế
+
+  // Lấy thời gian đi từ vị trí tài xế hiện tại tới điểm đích
   async simulateTravelTime(latitude: number, longitude: number): Promise<string> {
     const estimatedTime = await this.getTravelTime(this.driverLatitude, this.driverLongitude, latitude, longitude);
     return estimatedTime;
   }
+
   // Hàm di chuyển tài xế từng bước về phía địa chỉ đích
   private moveDriverTowardsDestination(destinationLatitude: number, destinationLongitude: number) {
     const latDiff = destinationLatitude - this.driverLatitude;
@@ -116,7 +120,7 @@ export class OrderService {
               quantity: true,
               Product: {
                 select: {
-                  
+
                   products_name: true,
                   products_price: true,
                   products_image: true,
@@ -151,7 +155,7 @@ export class OrderService {
               quantity: true,
               Product: {
                 select: {
-                  products_id:true,
+                  products_id: true,
                   products_name: true,
                   products_price: true,
                   products_image: true,
@@ -226,6 +230,7 @@ export class OrderService {
 
     let updatedTime = existingOrder.thoiGian;
 
+    // Trường hợp cập nhật trạng thái giao hàng và địa chỉ
     if (status === 'Đang giao hàng') {
       if (address) {
         const { latitude, longitude } = await this.getCoordinates(address);
@@ -238,6 +243,7 @@ export class OrderService {
       }
     }
 
+    // Trường hợp nếu có sản phẩm mới thì cập nhật tổng tiền
     let totalAmount = existingOrder.totalAmount || 0;
     if (orderProducts && orderProducts.length > 0) {
       totalAmount = 0;
@@ -289,12 +295,11 @@ export class OrderService {
     }
   }
 
-
+  // Lấy vị trí địa lý (latitude & longitude) từ địa chỉ được truyền vào.
   async getCoordinates(address: string): Promise<{ latitude: number, longitude: number }> {
     const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json`;
 
     try {
-      // const response = await axios.get(url);
       const response = await axios.get(url, {
         headers: {
           'User-Agent': 'back-end/0.0.1 (hoangquy4874@gmail.com)',
@@ -311,6 +316,7 @@ export class OrderService {
       throw new Error(`Lỗi khi gọi Nominatim API: ${error.message}`);
     }
   }
+  // Tính thời gian di chuyển giữa hai vị trí.
   async getTravelTime(startLat: number, startLon: number, endLat: number, endLon: number): Promise<string> {
     const osrmUrl = `http://router.project-osrm.org/route/v1/driving/${startLon},${startLat};${endLon},${endLat}?overview=false&geometries=geojson`;
 
