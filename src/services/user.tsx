@@ -9,6 +9,13 @@ class UserService {
       method: "GET",
     });
   }
+  updatePassword(userId: number, data: UpdatePasswordDto) {
+    return request({
+      url: `/User/update-password/${userId}`,
+      method: "POST",
+      data,
+    });
+  }
 }
 
 export const userService: UserService = new UserService();
