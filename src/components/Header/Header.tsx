@@ -40,9 +40,6 @@ const Header: React.FC = () => {
           className="flex justify-center items-center"
           style={{ width: "16%" }}
         >
-          <LiaPhoneVolumeSolid
-            style={{ fontSize: 40, paddingRight: 8, color: "#87c84a" }}
-          />
           <div>
             <p style={{ marginBottom: 0 }}>Giao hàng tận nơi</p>
             <p style={{ color: "#87c84a" }}>0902.504.708</p>
