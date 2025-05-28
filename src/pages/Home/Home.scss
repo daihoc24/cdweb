@@ -1,0 +1,62 @@
+.card {
+    margin-bottom: 10px;
+}
+
+.detail {
+    border: 1px solid #87c84a;
+    background: #fff;
+    color: #87c84a;
+    transition: all 0.3s;
+
+    &:hover {
+        background: #87c84a !important;
+        border: none;
+        color: #fff !important;
+    }
+}
+
+.mb-0 {
+    font-size: 120%;
+}
+
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector,
+.ant-select-focused .ant-select-selector {
+    border-color: #52c41a !important;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    display: none !important;
+    /* Ẩn mũi tên điều hướng */
+}
+
+.carousel-indicators {
+    left: 1% !important;
+}
+
+.banner_home {
+    padding-left: 100px;
+}
+
+.box_item {
+    border: 1px solid #00000017;
+    border-radius: 5px;
+}
+
+.home_type {
+    padding: 12px 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #00000017;
+
+    a {
+        text-decoration: none;
+        color: black;
+        transition: all 0.3s;
+    }
+
+    &:hover {
+        a {
+            color: #52c41a !important;
+        }
+    }
+}
