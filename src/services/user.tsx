@@ -16,6 +16,13 @@ class UserService {
       data,
     });
   }
+  loginUser(data: UserLogin) {
+    return request({
+      url: "/Auth/Login",
+      method: "POST",
+      data,
+    });
+  }
 }
 
 export const userService: UserService = new UserService();
