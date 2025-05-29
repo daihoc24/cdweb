@@ -23,6 +23,20 @@ class UserService {
       data,
     });
   }
+  signUp(data: UserSignup) {
+    return request({
+      url: "/Auth/Signup",
+      method: "POST",
+      data,
+    });
+  }
+  verifyEmail(email: string, code: string) {
+    return request({
+      url: "/Auth/Verify",
+      method: "POST",
+      data: { email, code },
+    });
+  }
 }
 
 export const userService: UserService = new UserService();

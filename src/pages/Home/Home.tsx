@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "antd";
-import data from "../../data.json";
 import "./Home.scss";
 import { Link } from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";

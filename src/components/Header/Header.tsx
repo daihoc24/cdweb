@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import "./Header.scss";
+import "./header.scss";
 import Navbar from "./components/Navbar";
 import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
