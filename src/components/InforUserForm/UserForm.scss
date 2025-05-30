@@ -1,0 +1,310 @@
+// Variables
+$primary-color: #87c84b;
+$primary-hover: #75b33c;
+$primary-active: #6ba037;
+$white: #ffffff;
+$gray-light: #f8f9fa;
+$gray-border: #e8e8e8;
+$gray-text: #666666;
+$shadow-light: 0 2px 8px rgba(135, 200, 75, 0.1);
+$shadow-medium: 0 4px 12px rgba(135, 200, 75, 0.15);
+$border-radius: 8px;
+$border-radius-lg: 12px;
+
+// Container styling
+.container {
+//   min-height: 100vh;
+  padding: 20px 0;
+
+  .user-form-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+}
+
+// Main card styling
+.user-info-card {
+  background: $white;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-medium;
+  padding: 32px;
+  margin-bottom: 24px;
+  border: 1px solid rgba(135, 200, 75, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 8px 24px rgba(135, 200, 75, 0.2);
+    transform: translateY(-2px);
+  }
+
+  h2 {
+    color: $primary-color;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    text-align: center;
+    position: relative;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(135deg, $primary-color, $primary-hover);
+      margin: 8px auto 0;
+      border-radius: 2px;
+    }
+  }
+}
+
+// Form styling
+.ant-form {
+  .ant-form-item-label > label {
+    color: $gray-text;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .ant-row {
+    margin-bottom: 8px;
+  }
+}
+
+// Custom input styling
+.input-custom {
+  border: 2px solid $gray-border !important;
+  border-radius: $border-radius !important;
+  padding: 12px 16px !important;
+  font-size: 14px !important;
+  transition: all 0.3s ease !important;
+  background: $white !important;
+  height: auto !important;
+
+  &:hover {
+    border-color: rgba(135, 200, 75, 0.5) !important;
+    box-shadow: 0 0 0 2px rgba(135, 200, 75, 0.1) !important;
+  }
+
+  &:focus,
+  &.ant-input-focused {
+    border-color: $primary-color !important;
+    box-shadow: 0 0 0 3px rgba(135, 200, 75, 0.2) !important;
+    outline: none !important;
+  }
+
+  &:disabled {
+    background: $gray-light !important;
+    border-color: $gray-border !important;
+    color: $gray-text !important;
+    cursor: not-allowed !important;
+  }
+}
+
+// DatePicker specific styling
+.ant-picker {
+  &.input-custom {
+    width: 100% !important;
+    
+    .ant-picker-input > input {
+      font-size: 14px !important;
+    }
+  }
+
+  &:hover {
+    border-color: rgba(135, 200, 75, 0.5) !important;
+  }
+
+  &.ant-picker-focused {
+    border-color: $primary-color !important;
+    box-shadow: 0 0 0 3px rgba(135, 200, 75, 0.2) !important;
+  }
+}
+
+// Button actions container
+.user-actions {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(135, 200, 75, 0.1);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+// Button styling
+.ant-btn {
+  &.ant-btn-primary {
+    background: linear-gradient(135deg, $primary-color, $primary-hover) !important;
+    border: none !important;
+    border-radius: $border-radius !important;
+    padding: 12px 32px !important;
+    height: auto !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    box-shadow: $shadow-light !important;
+    transition: all 0.3s ease !important;
+
+    &:hover {
+      background: linear-gradient(135deg, $primary-hover, $primary-active) !important;
+      transform: translateY(-1px) !important;
+      box-shadow: 0 4px 16px rgba(135, 200, 75, 0.3) !important;
+    }
+
+    &:active {
+      transform: translateY(0) !important;
+    }
+  }
+
+  // Custom buttons in popup
+  &.popup-trigger-btn {
+    background: $white !important;
+    border: 2px solid $primary-color !important;
+    color: $primary-color !important;
+    border-radius: $border-radius !important;
+    padding: 12px 24px !important;
+    height: auto !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+    min-width: 140px !important;
+
+    &:hover {
+      background: $primary-color !important;
+      color: $white !important;
+      transform: translateY(-2px) !important;
+      box-shadow: $shadow-medium !important;
+    }
+
+    &:active {
+      transform: translateY(0) !important;
+    }
+  }
+}
+
+// Modal styling
+.ant-modal {
+  .ant-modal-content {
+    border-radius: $border-radius-lg !important;
+    overflow: hidden !important;
+  }
+//     .ant-modal-title {
+//       color: $white !important;
+//       font-weight: 600 !important;
+//       font-size: 18px !important;
+//     }
+  
+
+//   .ant-modal-close {
+//     color: $white !important;
+    
+//     &:hover {
+//       color: rgba(255, 255, 255, 0.8) !important;
+//     }
+//   }
+
+//   .ant-modal-body {
+//     padding: 24px !important;
+//   }
+}
+
+// Form in modal
+.modal-form {
+  .ant-form-item {
+    margin-bottom: 20px;
+
+    &:last-child {
+      margin-bottom: 0;
+      margin-top: 24px;
+      text-align: center;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .user-info-card {
+    margin: 0 16px 24px;
+    padding: 24px 20px;
+
+    h2 {
+      font-size: 20px;
+    }
+  }
+
+  .user-actions {
+    margin-top: 24px;
+    padding: 0 20px;
+  }
+
+  .ant-col {
+    margin-bottom: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px 0;
+  }
+
+  .user-info-card {
+    margin: 0 12px 20px;
+    padding: 20px 16px;
+  }
+
+  .ant-btn {
+    &.popup-trigger-btn {
+      width: 100% !important;
+      min-width: auto !important;
+    }
+  }
+}
+
+// Loading and animation states
+.form-loading {
+  opacity: 0.7;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+// Success feedback
+.update-success {
+  .ant-form-item-control-input {
+    position: relative;
+
+    &::after {
+      content: '✓';
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: $primary-color;
+      font-weight: bold;
+      font-size: 16px;
+    }
+  }
+}
+
+// Custom scrollbar for long forms
+.user-form-container {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $gray-light;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(135, 200, 75, 0.3);
+    border-radius: 3px;
+
+    &:hover {
+      background: rgba(135, 200, 75, 0.5);
+    }
+  }
+}

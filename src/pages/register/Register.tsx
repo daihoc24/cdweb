@@ -4,6 +4,7 @@ import { Form, Input, Button, DatePicker, Select, message } from "antd";
 import "./register.scss";
 import { userService } from "../../services/user";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const { Option } = Select;
 
@@ -78,12 +79,20 @@ const Register: React.FC = () => {
 
       const response = await userService.signUp(userData);
 
-      message.success("Đăng ký thành công! Vui lòng nhập mã xác thực.");
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Đăng ký thành công. Vui lòng nhập mã xác thực!",
+      });
       setEmail(values.user_email);
       setVerificationCode(response.data.content);
       setIsVerificationStep(true);
     } catch (error) {
-      message.error("Đăng ký thất bại. Vui lòng thử lại!");
+      Swal.fire({
+        icon: "error",
+        title: `Error!`,
+        text: "Đăng ký thất bại. Vui lòng thử lại!",
+      });
     }
   };
   const getTinhName = (id: string) => {
@@ -99,12 +108,19 @@ const Register: React.FC = () => {
     try {
       const response = await userService.verifyEmail(email, verificationCode);
       if (response.status === 201) {
-        message.success(response.data.message || "Xác thực thành công!");
+        Swal.fire({
+          icon: "success",
+          title: "Success!",
+          text: response.data.message || "Xác thực thành công!",
+        });
         setIsVerificationStep(false);
         navigate("/login");
       } else {
-        message.error("Xác thực thất bại. Kiểm tra lại thông tin!");
-        console.log(email);
+        Swal.fire({
+          icon: "error",
+          title: `Error!`,
+          text: "Xác thực thất bại. Kiểm tra lại thông tin!",
+        });
       }
     } catch (error: any) {
       message.error(
