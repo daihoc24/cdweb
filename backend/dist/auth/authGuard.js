@@ -25,22 +25,17 @@ let JwtAuthGuard = class JwtAuthGuard {
     async canActivate(context) {
         const request = context.switchToHttp().getRequest();
         const authHeader = request.headers.authorization;
-        console.log('Authorization Header:', authHeader);
         if (authHeader && authHeader.startsWith('Bearer ')) {
             const token = authHeader.split(' ')[1];
-            console.log('Token:', token);
             try {
                 const decoded = this.jwtService.verify(token, {
                     secret: this.configService.get('SECRET_KEY'),
                 });
-                console.log('SECRET_KEY:', this.configService.get('SECRET_KEY'));
-                console.log('Decoded Token:', decoded);
                 const user = await this.prisma.user.findUnique({
                     where: {
                         user_id: decoded.data.id,
                     },
                 });
-                console.log('Prisma Query Result:', user);
                 if (!user) {
                     throw new common_1.UnauthorizedException('User not found');
                 }
@@ -48,7 +43,6 @@ let JwtAuthGuard = class JwtAuthGuard {
                 return true;
             }
             catch (error) {
-                console.error('JWT Verification Error:', error.message);
                 throw new common_1.UnauthorizedException('Invalid token');
             }
         }

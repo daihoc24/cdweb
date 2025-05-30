@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import './Account.scss';
 import UserForm from '../../components/InforUserForm/UserForm';
 
 
