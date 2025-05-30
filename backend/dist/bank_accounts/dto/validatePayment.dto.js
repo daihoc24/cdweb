@@ -9,34 +9,40 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateProductDto = void 0;
+exports.ValidatePaymentDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
-class CreateProductDto {
-    products_name;
-    products_price;
-    products_type;
-    quantitySold;
+class ValidatePaymentDto {
+    account_number;
+    account_name;
+    bank_name;
+    content;
+    amount;
 }
-exports.CreateProductDto = CreateProductDto;
+exports.ValidatePaymentDto = ValidatePaymentDto;
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateProductDto.prototype, "products_name", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
-], CreateProductDto.prototype, "products_price", void 0);
+], ValidatePaymentDto.prototype, "account_number", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateProductDto.prototype, "products_type", void 0);
+], ValidatePaymentDto.prototype, "account_name", void 0);
 __decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], ValidatePaymentDto.prototype, "bank_name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], ValidatePaymentDto.prototype, "content", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Number)
-], CreateProductDto.prototype, "quantitySold", void 0);
-//# sourceMappingURL=create-product.dto.js.map
+], ValidatePaymentDto.prototype, "amount", void 0);
+//# sourceMappingURL=validatePayment.dto.js.map

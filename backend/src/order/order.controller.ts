@@ -8,7 +8,8 @@ import { getData } from 'src/product/interface';
 import { Response } from 'express';
 
 ApiTags('Order')
-@Controller('api/Order') export class OrderController {
+@Controller('api/Order') 
+export class OrderController {
   constructor(private readonly orderService: OrderService) { }
   @Get('/getListOrder')
   async getListOrder(@Res() res: Response) {

@@ -6,20 +6,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProductModule = void 0;
+exports.OrderModule = void 0;
 const common_1 = require("@nestjs/common");
-const product_service_1 = require("./product.service");
-const product_controller_1 = require("./product.controller");
-const config_1 = require("@nestjs/config");
+const order_service_1 = require("./order.service");
+const order_controller_1 = require("./order.controller");
 const jwt_1 = require("@nestjs/jwt");
-let ProductModule = class ProductModule {
+const config_1 = require("@nestjs/config");
+let OrderModule = class OrderModule {
 };
-exports.ProductModule = ProductModule;
-exports.ProductModule = ProductModule = __decorate([
+exports.OrderModule = OrderModule;
+exports.OrderModule = OrderModule = __decorate([
     (0, common_1.Module)({
         imports: [config_1.ConfigModule, jwt_1.JwtModule.register({})],
-        controllers: [product_controller_1.ProductController],
-        providers: [product_service_1.ProductService],
+        controllers: [order_controller_1.OrderController],
+        providers: [order_service_1.OrderService],
     })
-], ProductModule);
-//# sourceMappingURL=product.module.js.map
+], OrderModule);
+//# sourceMappingURL=order.module.js.map

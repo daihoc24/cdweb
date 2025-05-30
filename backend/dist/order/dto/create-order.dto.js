@@ -9,34 +9,53 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateProductDto = void 0;
+exports.CreateOrderDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
-class CreateProductDto {
-    products_name;
-    products_price;
-    products_type;
-    quantitySold;
+const class_transformer_1 = require("class-transformer");
+class OrderProductDto {
+    products_id;
+    quantity;
 }
-exports.CreateProductDto = CreateProductDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Number)
+], OrderProductDto.prototype, "products_id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Number)
+], OrderProductDto.prototype, "quantity", void 0);
+class CreateOrderDto {
+    user_id;
+    address;
+    orderProducts;
+    phiShip = 15000;
+}
+exports.CreateOrderDto = CreateOrderDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Number)
+], CreateOrderDto.prototype, "user_id", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateProductDto.prototype, "products_name", void 0);
+], CreateOrderDto.prototype, "address", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [OrderProductDto] }),
+    (0, class_validator_1.IsArray)(),
+    (0, class_transformer_1.Type)(() => OrderProductDto),
+    __metadata("design:type", Array)
+], CreateOrderDto.prototype, "orderProducts", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsInt)(),
     __metadata("design:type", Number)
-], CreateProductDto.prototype, "products_price", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], CreateProductDto.prototype, "products_type", void 0);
-__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
-], CreateProductDto.prototype, "quantitySold", void 0);
-//# sourceMappingURL=create-product.dto.js.map
+], CreateOrderDto.prototype, "phiShip", void 0);
+//# sourceMappingURL=create-order.dto.js.map

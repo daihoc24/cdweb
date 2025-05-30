@@ -6,20 +6,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProductModule = void 0;
+exports.BankAccountsModule = void 0;
 const common_1 = require("@nestjs/common");
-const product_service_1 = require("./product.service");
-const product_controller_1 = require("./product.controller");
+const bank_accounts_controller_1 = require("./bank_accounts.controller");
+const bank_accounts_service_1 = require("./bank_accounts.service");
 const config_1 = require("@nestjs/config");
 const jwt_1 = require("@nestjs/jwt");
-let ProductModule = class ProductModule {
+let BankAccountsModule = class BankAccountsModule {
 };
-exports.ProductModule = ProductModule;
-exports.ProductModule = ProductModule = __decorate([
+exports.BankAccountsModule = BankAccountsModule;
+exports.BankAccountsModule = BankAccountsModule = __decorate([
     (0, common_1.Module)({
         imports: [config_1.ConfigModule, jwt_1.JwtModule.register({})],
-        controllers: [product_controller_1.ProductController],
-        providers: [product_service_1.ProductService],
+        controllers: [bank_accounts_controller_1.BankAccountsController],
+        providers: [bank_accounts_service_1.PaymentService],
     })
-], ProductModule);
-//# sourceMappingURL=product.module.js.map
+], BankAccountsModule);
+//# sourceMappingURL=bank_accounts.module.js.map
