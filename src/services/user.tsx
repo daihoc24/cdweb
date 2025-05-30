@@ -37,6 +37,13 @@ class UserService {
       data: { email, code },
     });
   }
+  updateUser(userId: number, data: any) {
+    return request({
+      url: `/User/UpdateUser/${userId}`,
+      method: "PUT",
+      data,
+    });
+  }
 }
 
 export const userService: UserService = new UserService();
