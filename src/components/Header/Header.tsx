@@ -4,10 +4,11 @@ import Navbar from "./components/Navbar";
 import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import { LiaPhoneVolumeSolid } from "react-icons/lia";
+import { useCart } from "../../pages/ProductDetail/CartContext";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-  //const { cartItemCount } = useCart();
+  const { cartItemCount } = useCart();
   const [isVisible, setIsVisible] = useState(false);
   const [isCartVisible, setIsCartVisible] = useState(false);
 
@@ -100,7 +101,7 @@ const Header: React.FC = () => {
             />
           </NavLink>
 
-          {/* <span className="cart-count">{cartItemCount}</span> */}
+          <span className="cart-count">{cartItemCount}</span>
         </div>
       </div>
     </div>

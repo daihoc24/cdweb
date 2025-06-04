@@ -7,6 +7,7 @@ import Register from "../pages/register/Register";
 import Account from "../pages/Account/Account";
 import withAuthGuard from "../guards/AuthGuard";
 import ProductDetail from '../pages/ProductDetail/ProductDetail';
+import Cart from '../pages/cart/Cart';
 
 export default function Router() {
   return (
@@ -23,7 +24,10 @@ export default function Router() {
           path="/account"
           element={React.createElement(withAuthGuard(Account))}
         />
-
+        <Route
+          path="/cart"
+          element={React.createElement(withAuthGuard(Cart))}
+        />
       </Route >
     </Routes >
 
