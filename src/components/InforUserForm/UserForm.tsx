@@ -2,24 +2,24 @@ import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { Col, DatePicker, Row, Form, Input, Button, Modal } from "antd";
 import dayjs from "dayjs";
-import "./UserForm.scss"; // Nếu bạn đã có file SCSS này
 import Popup from "../Popup/Popup";
 import ForgotPass from "../Header/components/ForgotPass/ForgotPass";
 import { User } from "../../interfaces/user";
 import { jwtDecode } from "jwt-decode";
 import { userService } from "../../services/user";
+import "./UserForm.scss";
+import Swal from "sweetalert2";
 // Định nghĩa props cho FillUserForm
 interface FillUserFormProps {
   user: User;
 }
 
 const storedUser = localStorage.getItem("USER_INFO") || "{}";
-let userId = null;
+let userId: number | null = null;
 try {
   // Kiểm tra xem token có hợp lệ không trước khi giải mã
   const decoded: any = jwtDecode(storedUser);
   userId = decoded?.data?.id;
-  console.log(userId);
 } catch (error) {
   console.error("Token không hợp lệ:", error);
 }
@@ -42,17 +42,26 @@ const FillUserForm: React.FC<FillUserFormProps> = ({ user }) => {
   }, [form, user]);
 
   const handleSubmit = async (values: any) => {
-    const updatedData = {
-      ...values,
-    };
-    try {
-      const response = await userService.updateUser(userId, updatedData);
-      console.log("Cập nhật thành công:", response.data);
-      window.location.reload();
-    } catch (error) {
-      console.error("Cập nhật thất bại:", error);
-    }
+  const updatedData = {
+    ...values,
   };
+  try {
+    const response = await userService.updateUser(userId!, updatedData);
+
+    const result = await Swal.fire({
+      icon: "success",
+      title: "Success!",
+      text: "Cập nhật thông tin thành công",
+      confirmButtonText: "OK",
+    });
+
+    if (result.isConfirmed) {
+      window.location.reload();
+    }
+  } catch (error) {
+    console.error("Cập nhật thất bại:", error);
+  }
+};
   return (
     <Form form={form} layout="vertical" onFinish={handleSubmit}>
       <Row gutter={16}>
@@ -100,7 +109,7 @@ const UserForm: React.FC = () => {
     if (userId) {
       const fetchUserInformation = async () => {
         try {
-          const response = await userService.getUserById(userId);
+          const response = await userService.getUserById(userId!);
           if (response.status === 200) {
             setUser(response.data.content);
             console.log(user);

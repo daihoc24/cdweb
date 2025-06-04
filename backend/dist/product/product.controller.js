@@ -208,7 +208,8 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ProductController.prototype, "deleteCommentById", null);
 exports.ProductController = ProductController = __decorate([
-    (0, common_1.Controller)('product'),
+    (0, swagger_1.ApiTags)('Product'),
+    (0, common_1.Controller)('api/Product'),
     __metadata("design:paramtypes", [product_service_1.ProductService])
 ], ProductController);
 //# sourceMappingURL=product.controller.js.map

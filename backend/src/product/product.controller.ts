@@ -11,7 +11,8 @@ import { diskStorage } from 'multer';
 import { getData } from './interface';
 import { CreateCommentDto } from './dto/create-comment.dto';
 
-@Controller('product')
+@ApiTags('Product')
+@Controller('api/Product') 
 export class ProductController {
   constructor(private readonly productService: ProductService) { }
 

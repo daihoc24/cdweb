@@ -145,6 +145,12 @@ let AuthService = class AuthService {
                 message: 'Email không tồn tại.',
             };
         }
+        if (!user.is_verified) {
+            return {
+                status: 403,
+                message: 'Tài khoản chưa được xác thực. Vui lòng kiểm tra email để xác thực trước.',
+            };
+        }
         const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
         await this.prisma.user.update({
             where: { user_id: user.user_id },

@@ -10,11 +10,14 @@ exports.ProductModule = void 0;
 const common_1 = require("@nestjs/common");
 const product_service_1 = require("./product.service");
 const product_controller_1 = require("./product.controller");
+const config_1 = require("@nestjs/config");
+const jwt_1 = require("@nestjs/jwt");
 let ProductModule = class ProductModule {
 };
 exports.ProductModule = ProductModule;
 exports.ProductModule = ProductModule = __decorate([
     (0, common_1.Module)({
+        imports: [config_1.ConfigModule, jwt_1.JwtModule.register({})],
         controllers: [product_controller_1.ProductController],
         providers: [product_service_1.ProductService],
     })
