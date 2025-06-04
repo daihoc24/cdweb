@@ -1,0 +1,22 @@
+.card {
+  margin-bottom: 10px;
+}
+.detail {
+  border: 1px solid #87c84a;
+  background: #fff;
+  color: #87c84a;
+  transition: all 0.3s;
+  &:hover {
+    background: #87c84a !important;
+    border: none;
+    color: #fff !important;
+  }
+}
+.mb-0 {
+  font-size: 120%;
+}
+.pagination-btn:hover {
+  background-color: green; /* Màu xanh lá */
+  color: green; /* Màu chữ (tùy chọn) */
+}
+
