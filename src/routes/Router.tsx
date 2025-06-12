@@ -8,6 +8,7 @@ import Account from "../pages/Account/Account";
 import withAuthGuard from "../guards/AuthGuard";
 import ProductDetail from '../pages/ProductDetail/ProductDetail';
 import Cart from '../pages/cart/Cart';
+import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 
 export default function Router() {
   return (
@@ -16,6 +17,7 @@ export default function Router() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route
           path="/product-detail/:productId"
           element={React.createElement(withAuthGuard(ProductDetail))}

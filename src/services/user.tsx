@@ -44,6 +44,27 @@ class UserService {
       data,
     });
   }
+  forgotPassword(email: string) {
+    return request({
+      url: "/Auth/forgot-password",
+      method: "POST",
+      data: { email },
+    });
+  }
+  verifyForgotPasswordCode(email: string, verificationCode: string) {
+    return request({
+      url: "/Auth/verify-forgot-password-code",
+      method: "POST",
+      data: { email, verificationCode },
+    });
+  }
+  resetPassword(email: string, newPassword: string) {
+    return request({
+      url: "/Auth/reset-password",
+      method: "POST",
+      data: { email, newPassword },
+    });
+  }
 }
 
 export const userService: UserService = new UserService();
