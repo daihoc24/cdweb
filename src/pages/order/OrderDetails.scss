@@ -1,0 +1,48 @@
+.orderDetailContainer{
+  width: 1870px;
+  padding: 20px;
+  display: flex;
+  .info{
+    background: #87c84a;
+    padding: 10px;
+    margin-top: -18px;
+    width: 600px;
+    margin-left: -20px;
+    color: white;
+  }
+  .order-details{
+    margin-top: 120px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+    max-width: 800px;
+    width: 600px;
+    background: white;
+    padding: 20px;
+    font-size: 20px;
+    box-shadow: 0px 5px 5px #338000;
+    .back{
+      float: right;
+      margin-right: 20px;
+      font-weight: bold;
+      color: red;
+      text-decoration: none;
+      margin-top: -5px;
+    }
+
+  }
+  .order-detail-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .detail-title {
+    font-weight: bold;
+    margin-right: 10px;
+    width: 200px; /* Điều chỉnh kích thước của tiêu đề nếu cần */
+  }
+
+  .detail-info {
+    flex: 1;
+  }
+}

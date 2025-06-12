@@ -1,0 +1,89 @@
+.large-font {
+  margin-top: 100px;
+  margin-left: 100px;
+  display: flex;
+  height: 700px;
+  .orderContainer{
+    width: 1000px;
+
+  }
+  :where(.css-dev-only-do-not-override-98ntnt).ant-list .ant-list-item .ant-list-item-meta .ant-list-item-meta-description {
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 18px;
+    line-height: 1.5714285714285714;
+  }
+  :where(.css-dev-only-do-not-override-98ntnt).ant-list .ant-list-item .ant-list-item-meta .ant-list-item-meta-title {
+    margin: 0 0 4px 0;
+    color: rgba(0, 0, 0, 0.88);
+    font-size: 20px;
+    line-height: 1.5714285714285714;
+  }
+  :where(.css-dev-only-do-not-override-98ntnt).ant-list * {
+    outline: none;
+    font-size: 20px;
+  }
+  .titelOrder{
+    height: 50px;
+    width: 550px;
+    display: flex;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-left: -20px;
+    justify-content: center;
+    background: #87c84a;
+    margin-top: -20px;
+    color: white;
+    h3{
+      margin-top: 5px;
+    }
+    p{
+      margin-top: 10px;
+      color: white;
+    }
+  }
+
+  .ant-avatar{
+    width: 100px;
+    height: 100px;
+  }
+  .s{
+
+    margin-left: 150px;
+    width: 550px;
+    box-shadow: 0 5px 10px black;
+    height: 600px;
+    label{
+      font-size: 17px;
+    }
+    .infomation{
+      padding: 20px;
+      .form{
+        display: flex;
+        .ant-form-item {
+          box-sizing: border-box;
+          width: 200px;
+          margin-left: 5px;
+
+
+        }
+
+
+      }
+    }
+    .submit{
+      background: #87c84a;
+      font-size: 20px;
+      padding: 20px;
+      margin-top: 10px;
+      &:hover{
+        background: #eeb042;
+      }
+    }
+
+  }
+
+
+}
+
+

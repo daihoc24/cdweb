@@ -27,3 +27,23 @@ export interface Product {
     products_price: number;
     products_image: string;
 }
+
+interface createOrderProduct {
+    products_id: number;
+    quantity: number;
+}
+
+export interface createOrder {
+    user_id: number | null;
+    address: string;
+    orderProducts: createOrderProduct[];
+    phiShip: number;
+}
+
+export interface OrderData {
+    sonha: string;
+    phuong: string;
+    phiShip: number;
+    huyen: string;
+    tinh: string;
+}
