@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./OrderDteails.scss";
+import "./OrderDetails.scss";
 import { Link, useParams } from "react-router-dom";
 import { useOrderLogic } from "./OrderLogic";
 import { orderService } from "../../services/order";
