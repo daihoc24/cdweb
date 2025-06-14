@@ -10,6 +10,7 @@ import ProductDetail from '../pages/ProductDetail/ProductDetail';
 import Cart from '../pages/cart/Cart';
 import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import OrderDetails from "../pages/order/OrderDetails";
+import { Payment } from '@mui/icons-material';
 
 export default function Router() {
   return (
@@ -34,6 +35,10 @@ export default function Router() {
         <Route
           path="/orderDetail/:orderId"
           element={React.createElement(withAuthGuard(OrderDetails))}
+        />
+        <Route
+          path="/payment/:orderId"
+          element={React.createElement(withAuthGuard(Payment))}
         />
       </Route >
     </Routes >
