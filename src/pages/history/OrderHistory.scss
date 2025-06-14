@@ -1,0 +1,30 @@
+.orderHistoryContainer {
+  padding: 20px;
+  margin-top: 80px;
+}
+
+.orderTable {
+  width: 1500px;
+  border-collapse: collapse;
+  margin: auto;
+  margin-bottom: 100px;
+}
+
+.orderTable th, .orderTable td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+
+}
+
+
+.orderTable th {
+  background-color: #f4f4f4;
+}
+
+.productImage {
+  width: 100px; /* Điều chỉnh kích thước của hình ảnh sản phẩm */
+  height: auto;
+  object-fit: cover;
+  border-radius: 5px;
+}

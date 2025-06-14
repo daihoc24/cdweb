@@ -16,6 +16,14 @@ class OrderService {
             data,
         });
     }
+    getListOrderByUserID(
+        userId: number | undefined
+    ): Promise<AxiosResponse<any>> {
+        return request({
+            url: `/Order/getListOrderByUserID/${userId}`,
+            method: "GET",
+        });
+    }
 }
 export const orderService = new OrderService();
 

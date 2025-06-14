@@ -11,6 +11,7 @@ import Cart from '../pages/cart/Cart';
 import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import OrderDetails from "../pages/order/OrderDetails";
 import { Payment } from '@mui/icons-material';
+import OrderHistoryPage from "../pages/history/OrderHistory";
 
 export default function Router() {
   return (
@@ -41,6 +42,10 @@ export default function Router() {
           element={React.createElement(withAuthGuard(Payment))}
         />
       </Route >
+      <Route
+        path="/order-history"
+        element={React.createElement(withAuthGuard(OrderHistoryPage))}
+      />
     </Routes >
 
   )
