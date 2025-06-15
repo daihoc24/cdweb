@@ -40,6 +40,39 @@ class ProductService {
             data: { userId },
         });
     }
+    deleteProduct(id: number) {
+        return request({
+            url: `/Product/DeleteProduct/${id}`,
+            method: "DELETE",
+        });
+    }
+    uploadImg(productId: number, data: FormData) {
+        return request({
+            url: `/Product/upload-productImg/${productId}`,
+            method: "POST",
+            data,
+        });
+    }
+    searchProductByName(name: any) {
+        return request({
+            url: `/Product/searchProductByName?name=${name}`,
+            method: "GET",
+        });
+    }
+    addProduct(data: addProduct) {
+        return request({
+            url: `/Product/AddProduct`,
+            method: "POST",
+            data,
+        });
+    }
+    updateProduct(id: number, data: addProduct) {
+        return request({
+            url: `/Product/UpdateProduct/${id}`,
+            method: "PUT",
+            data,
+        });
+    }
 }
 
 export const productService: ProductService = new ProductService();
