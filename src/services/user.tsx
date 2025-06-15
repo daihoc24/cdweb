@@ -65,6 +65,31 @@ class UserService {
       data: { email, newPassword },
     });
   }
+  getListUser() {
+    return request({
+      url: "/User/getListUser",
+      method: "GET",
+    });
+  }
+  deleteUser(userId: number) {
+    return request({
+      url: `/User/DeleteUser/${userId}`,
+      method: "DELETE",
+    });
+  }
+  searchUserByName(name: string) {
+    return request({
+      url: `/User/searchUserByName?name=${name}`,
+      method: "GET",
+    });
+  }
+  creatUser(data: addUser) {
+    return request({
+      url: "/User/creatUser",
+      method: "POST",
+      data,
+    });
+  }
 }
 
 export const userService: UserService = new UserService();
