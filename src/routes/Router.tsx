@@ -19,6 +19,12 @@ import AddProduct from '../pages/Admin/Product/AddProduct/AddProduct';
 import UpdateProduct from '../pages/Admin/Product/UpdateProduct/UpdateProduct';
 import Product from '../pages/product/Product';
 import Order from '../pages/order/Order';
+import Users from '../pages/Admin/User/User';
+import AddUser from '../pages/Admin/User/AddUser/AddUser';
+import UpdateUser from '../pages/Admin/User/UpdateUser/UpdateUser';
+import Orders from '../pages/Admin/Order/Order';
+import UpdateOrder from '../pages/Admin/Order/UpdateOrder/UpdateOrder';
+import StatisticsPage from '../pages/Admin/Statistics/Statistics';
 
 export default function Router() {
   return (
@@ -65,8 +71,13 @@ export default function Router() {
         <Route path="/admin/products" element={<Products />} />
         <Route path="/admin/addProduct" element={<AddProduct />} />
         <Route path="/admin/updateProduct/:id" element={<UpdateProduct />} />
+        <Route path="/admin/users" element={<Users />} />
+        <Route path="/admin/addUser" element={<AddUser />} />
+        <Route path="/admin/updateUser/:userId" element={<UpdateUser />} />
+        <Route path="/admin/orders" element={<Orders />} />
+        <Route path="/admin/updateOrder/:id" element={<UpdateOrder />} />
+        <Route path="/admin/statistics" element={<StatisticsPage />} />
       </Route>
-
     </Routes >
 
   )
