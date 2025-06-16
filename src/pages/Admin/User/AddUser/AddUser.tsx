@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Form} from "antd";
+import { DatePicker, Form, Input, InputNumber, Select, Switch } from "antd";
 import { FormikProps, useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { addUser, AddUserFormValues} from "../../../../interfaces/user";
+import { addUser, AddUserFormValues, User } from "../../../../interfaces/user";
 import moment from "moment";
 import { userService } from "../../../../services/user";
 import axios from "axios";
@@ -147,8 +147,136 @@ const AddUser: React.FC = () => {
         formik.setFieldValue("user_birthDate", user_birthDate);
     };
 
-    return
-    ;
+    return (
+        <Form
+            onSubmitCapture={formik.handleSubmit}
+            labelCol={{ span: 4 }}
+            wrapperCol={{ span: 14 }}
+            layout="horizontal"
+            initialValues={{ size: componentSize }}
+            onValuesChange={onFormLayoutChange}
+            size={componentSize as SizeType}
+            style={{ maxWidth: 880 }}
+        >
+            <h3 style={{ marginBottom: "20px" }}>Thêm người dùng</h3>
+            <Form.Item label="Tên người dùng">
+                <Input name="user_fullname" onChange={formik.handleChange} />
+                {formik.errors.user_fullname && formik.touched.user_fullname && (
+                    <span className="form-label text-danger" style={{ display: "block" }}>
+                        {formik.errors.user_fullname}
+                    </span>
+                )}
+            </Form.Item>
+            <Form.Item label="Email">
+                <Input name="user_email" onChange={formik.handleChange} />
+                {formik.errors.user_email && formik.touched.user_email && (
+                    <span className="form-label text-danger" style={{ display: "block" }}>
+                        {formik.errors.user_email}
+                    </span>
+                )}
+            </Form.Item>
+            <Form.Item label="Password">
+                <Input name="user_password" onChange={formik.handleChange} />
+                {formik.errors.user_password && formik.touched.user_password && (
+                    <span className="form-label text-danger" style={{ display: "block" }}>
+                        {formik.errors.user_password}
+                    </span>
+                )}
+            </Form.Item>
+            <Form.Item label="Số nhà">
+                <Input name="sonha" onChange={formik.handleChange} />
+                {formik.errors.sonha && formik.touched.sonha && (
+                    <span className="form-label text-danger" style={{ display: "block" }}>
+                        {formik.errors.sonha}
+                    </span>
+                )}
+            </Form.Item>
+            <Form.Item label="Tỉnh/Thành phố">
+                <Select
+                    defaultValue="Chọn tỉnh"
+                    style={{ width: 200 }}
+                    onChange={handleTinhChange} // Gọi handleTinhChange
+                    options={tinhData.map(({ id, full_name }) => ({
+                        value: id,
+                        label: full_name,
+                    }))}
+                />
+                {formik.errors.province && formik.touched.province && (
+                    <span className="form-label text-danger">
+                        {formik.errors.province}
+                    </span>
+                )}
+            </Form.Item>
+
+            <Form.Item label="Quận/Huyện">
+                <Select
+                    defaultValue="Chọn Quận/Huyện"
+                    style={{ width: 200 }}
+                    onChange={handleQuanChange}
+                    options={quanData.map(({ id, full_name }) => ({
+                        value: id,
+                        label: full_name,
+                    }))}
+                />
+                {formik.errors.district && formik.touched.district && (
+                    <span className="form-label text-danger">
+                        {formik.errors.district}
+                    </span>
+                )}
+            </Form.Item>
+
+            <Form.Item label="Phường/Xã">
+                <Select onChange={handleChangeSelect("ward")}>
+                    {phuongData.map(({ id, full_name }) => (
+                        <Select.Option key={id} value={full_name}>
+                            {full_name}
+                        </Select.Option>
+                    ))}
+                </Select>
+                {formik.errors.ward && formik.touched.ward && (
+                    <span className="form-label text-danger">{formik.errors.ward}</span>
+                )}
+            </Form.Item>
+
+            <Form.Item label="Số ĐT">
+                <Input name="user_phone" onChange={formik.handleChange} />
+                {formik.errors.user_phone && formik.touched.user_phone && (
+                    <span className="form-label text-danger" style={{ display: "block" }}>
+                        {formik.errors.user_phone}
+                    </span>
+                )}
+            </Form.Item>
+            <Form.Item label="Ngày sinh">
+                <DatePicker format={"DD/MM/YYYY"} onChange={handleChangeDatePicker} />
+                {formik.errors.user_birthDate && formik.touched.user_birthDate && (
+                    <span className="form-label text-danger" style={{ display: "block" }}>
+                        {formik.errors.user_birthDate}
+                    </span>
+                )}
+            </Form.Item>
+            <Form.Item label="Loại sản phẩm">
+                <Select
+                    defaultValue="Chọn loại sản phẩm"
+                    style={{ width: 120 }}
+                    onChange={handleChangeSelect("user_role")}
+                    options={[
+                        { value: "admin", label: "admin" },
+                        { value: "user", label: "user" },
+                    ]}
+                />
+                {formik.errors.user_role && formik.touched.user_role && (
+                    <span className="form-label text-danger">
+                        {formik.errors.user_role}
+                    </span>
+                )}
+            </Form.Item>
+            <Form.Item label="Tác vụ">
+                <button type="submit" className="btn btn-primary">
+                    Thêm người dùng
+                </button>
+            </Form.Item>
+        </Form>
+    );
 };
 
 export default AddUser;

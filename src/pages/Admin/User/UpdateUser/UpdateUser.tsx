@@ -1,10 +1,19 @@
 import * as Yup from "yup";
 import React, { useState, useEffect } from "react";
-import { Form} from "antd";
+import { DatePicker, Form, Input, InputNumber, Select, Switch } from "antd";
 import { FormikProps, useFormik } from "formik";
-import { useDispatch} from "react-redux";
+
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import {updateUser,UpdateUserFormValues} from "../../../../interfaces/user";
+import { productService } from "../../../../services/product";
+import {
+  addUser,
+  AddUserFormValues,
+  updateUser,
+  UpdateUserFormValues,
+  User,
+} from "../../../../interfaces/user";
+import moment from "moment";
 import { userService } from "../../../../services/user";
 import dayjs, { Dayjs } from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
@@ -169,7 +178,152 @@ const UpdateUser: React.FC = () => {
       formik.setFieldValue("user_birthDate", null);
     }
   };
-  return  
+  return (
+    <Form
+      onSubmitCapture={formik.handleSubmit}
+      labelCol={{ span: 4 }}
+      wrapperCol={{ span: 14 }}
+      layout="horizontal"
+      initialValues={{ size: componentSize }}
+      onValuesChange={onFormLayoutChange}
+      size={componentSize as SizeType}
+      style={{ maxWidth: 880 }}
+    >
+      <h3 style={{ marginBottom: "20px" }}>Cập nhật người dùng</h3>
+      <Form.Item label="Tên người dùng">
+        <Input
+          name="user_fullname"
+          onChange={formik.handleChange}
+          value={formik.values.user_fullname}
+        />
+        {formik.errors.user_fullname && formik.touched.user_fullname && (
+          <span className="form-label text-danger" style={{ display: "block" }}>
+            {formik.errors.user_fullname}
+          </span>
+        )}
+      </Form.Item>
+      <Form.Item label="user_email">
+        <Input
+          name="user_email"
+          onChange={formik.handleChange}
+          value={formik.values.user_email}
+        />
+        {formik.errors.user_email && formik.touched.user_email && (
+          <span className="form-label text-danger" style={{ display: "block" }}>
+            {formik.errors.user_email}
+          </span>
+        )}
+      </Form.Item>
+      <Form.Item label="Số nhà">
+        <Input
+          name="sonha"
+          onChange={formik.handleChange}
+          value={formik.values.sonha}
+        />
+        {formik.errors.sonha && formik.touched.sonha && (
+          <span className="form-label text-danger" style={{ display: "block" }}>
+            {formik.errors.sonha}
+          </span>
+        )}
+      </Form.Item>
+      <Form.Item label="Tỉnh/Thành phố">
+        <Select
+          defaultValue="Chọn tỉnh"
+          style={{ width: 200 }}
+          onChange={handleTinhChange} // Gọi handleTinhChange
+          options={tinhData.map(({ id, full_name }) => ({
+            value: id,
+            label: full_name,
+          }))}
+          value={formik.values.province}
+        />
+        {formik.errors.province && formik.touched.province && (
+          <span className="form-label text-danger">
+            {formik.errors.province}
+          </span>
+        )}
+      </Form.Item>
+      <Form.Item label="Quận/Huyện">
+        <Select
+          defaultValue="Chọn Quận/Huyện"
+          style={{ width: 200 }}
+          onChange={handleQuanChange}
+          options={quanData.map(({ id, full_name }) => ({
+            value: id,
+            label: full_name,
+          }))}
+          value={formik.values.district}
+        />
+        {formik.errors.district && formik.touched.district && (
+          <span className="form-label text-danger">
+            {formik.errors.district}
+          </span>
+        )}
+      </Form.Item>
+      <Form.Item label="Phường/Xã">
+        <Select
+          onChange={handleChangeSelect("ward")}
+          value={formik.values.ward}
+        >
+          {phuongData.map(({ id, full_name }) => (
+            <Select.Option key={id} value={full_name}>
+              {full_name}
+            </Select.Option>
+          ))}
+        </Select>
+      </Form.Item>
+      <Form.Item label="Số ĐT">
+        <Input
+          name="user_phone"
+          onChange={formik.handleChange}
+          value={formik.values.user_phone}
+        />
+        {formik.errors.user_phone && formik.touched.user_phone && (
+          <span className="form-label text-danger" style={{ display: "block" }}>
+            {formik.errors.user_phone}
+          </span>
+        )}
+      </Form.Item>
+      <Form.Item label="Ngày sinh">
+        <DatePicker
+          format="DD/MM/YYYY"
+          value={
+            formik.values.user_birthDate
+              ? dayjs(formik.values.user_birthDate)
+              : null
+          }
+          onChange={handleChangeDatePicker}
+        />
+        {formik.errors.user_birthDate && formik.touched.user_birthDate && (
+          <span className="form-label text-danger" style={{ display: "block" }}>
+            {formik.errors.user_birthDate}
+          </span>
+        )}
+      </Form.Item>
+      <Form.Item label="Loại sản phẩm">
+        <Select
+          defaultValue="Chọn loại sản phẩm"
+          style={{ width: 120 }}
+          onChange={handleChangeSelect("user_role")}
+          options={[
+            { value: "admin", label: "admin" },
+            { value: "user", label: "user" },
+          ]}
+          value={formik.values.user_role}
+        />
+        {formik.errors.user_role && formik.touched.user_role && (
+          <span className="form-label text-danger">
+            {formik.errors.user_role}
+          </span>
+        )}
+      </Form.Item>
+      <Form.Item label="Tác vụ">
+        <button type="submit" className="btn btn-primary">
+          Cập nhật người dùng
+        </button>
+      </Form.Item>
+    </Form>
+  );
 };
 
 export default UpdateUser;
