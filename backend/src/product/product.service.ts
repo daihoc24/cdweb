@@ -62,7 +62,10 @@ export class ProductService {
         },
       });
       return { data };
-    } catch { }
+    } catch (error) {
+      console.error(error);
+      throw new Error('Lỗi khi tìm kiếm sản phẩm');
+    }
   }
   async addComment(productId: number, body: CreateCommentDto) {
     try {

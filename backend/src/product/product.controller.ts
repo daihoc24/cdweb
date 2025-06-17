@@ -12,7 +12,7 @@ import { getData } from './interface';
 import { CreateCommentDto } from './dto/create-comment.dto';
 
 @ApiTags('Product')
-@Controller('api/Product') 
+@Controller('api/Product')
 export class ProductController {
   constructor(private readonly productService: ProductService) { }
 
@@ -133,12 +133,15 @@ export class ProductController {
   }
   @ApiBearerAuth()
   @Delete('/deleteCommentById/:commentId')
-  async deleteCommentById(@Param('commentId') commentId: string,  // Lấy commentId từ params
-    @Body() body: { userId: number },  // Lấy userId từ body
+  @UseGuards(JwtAuthGuard)
+  async deleteCommentById(
+    @Param('commentId') commentId: string,  // Lấy commentId từ params
+    // @Body() body: { userId: number },  // Lấy userId từ body
     @Req() req: any,  // Request object để truy cập thông tin người dùng
     @Res() res: Response  // Để gửi phản hồi về client
   ) {
-    await this.productService.deleteCommentById(+commentId, body.userId);
+    const userId = req.user.id;
+    await this.productService.deleteCommentById(+commentId, userId);
     return res.status(200).json({ message: 'Bình luận đã được xóa thành công.' });
   }
 }

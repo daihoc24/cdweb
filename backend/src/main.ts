@@ -9,9 +9,9 @@ import * as express from 'express';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe({
-    transform: true,           
-    whitelist: true, 
-    forbidNonWhitelisted: false,
+    transform: true,
+    whitelist: true,
+    forbidNonWhitelisted: true,
   }));
 
   const config = new DocumentBuilder()
@@ -24,6 +24,9 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
   app.use('/public/img', express.static(join(process.cwd(), 'public/img')));
 
-  await app.listen(8080);
+  const port = process.env.PORT || 8080;
+  await app.listen(port);
+  console.log(`Server is running on http://localhost:${port}`);
+
 }
 bootstrap();

@@ -8,8 +8,8 @@ export const ApiFile =
         type: 'object',
         properties: {
           [fileName]: {
-            type: 'file',
-            format: 'formData',
+            type: 'string',
+            format: 'binary',
           },
         },
       },
