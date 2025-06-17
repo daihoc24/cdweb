@@ -91,7 +91,7 @@ const OrderDetails: React.FC = () => {
         <div className="order-detail-section">
           <span className="detail-title">Tổng tiền:</span>
           <span className="detail-info">
-            {formatPrice(orderData.totalAmount + orderData.phiShip)}
+            {formatPrice(orderData.totalAmount)}
           </span>
         </div>
         <div className="order-detail-section">

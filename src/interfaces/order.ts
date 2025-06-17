@@ -6,7 +6,6 @@ export interface OrderData {
     tinh: string;
 }
 export interface updateOrdedrFormValues {
-    user_id: number | null;
     sonha: string;
     ward: string;
     district: string;
@@ -14,7 +13,6 @@ export interface updateOrdedrFormValues {
     orderProducts: createOrderProduct[];
 }
 export interface updateOrder {
-    user_id: number | null;
     address: string;
     status: string;
     orderProducts: createOrderProduct[];

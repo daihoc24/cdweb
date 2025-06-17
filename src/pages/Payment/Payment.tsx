@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import Swal from "sweetalert2";
 import { paymentService } from "../../services/payment";
 import { payment } from "../../interfaces/payment";
-
+import "./Payment.scss";
 const Payment: React.FC = () => {
   const navigate = useNavigate();
   const { orderId } = useParams();
@@ -73,9 +73,9 @@ const Payment: React.FC = () => {
   });
 
   return (
-    <div className="payment-form" style={{marginTop:"100px"}}>
+    <div className="payment-form">
       <h2>Thanh toán</h2>
-      <AntForm onFinish={formik.handleSubmit} style={{width:"50%", height:"400px", margin:"auto"}}>
+      <AntForm onFinish={formik.handleSubmit}>
         {/* Tài khoản */}
         <AntForm.Item
           label="Số tài khoản"

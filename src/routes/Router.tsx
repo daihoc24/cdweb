@@ -10,7 +10,6 @@ import ProductDetail from '../pages/ProductDetail/ProductDetail';
 import Cart from '../pages/cart/Cart';
 import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import OrderDetails from "../pages/order/OrderDetails";
-import { Payment } from '@mui/icons-material';
 import OrderHistoryPage from "../pages/history/OrderHistory";
 import withAdminGuard from '../guards/AdminGuard';
 import AdminLayout from '../layout/AdminLayout/AdminLayout';
@@ -25,6 +24,7 @@ import UpdateUser from '../pages/Admin/User/UpdateUser/UpdateUser';
 import Orders from '../pages/Admin/Order/Order';
 import UpdateOrder from '../pages/Admin/Order/UpdateOrder/UpdateOrder';
 import StatisticsPage from '../pages/Admin/Statistics/Statistics';
+import Payment from '../pages/Payment/Payment';
 
 export default function Router() {
   return (
@@ -58,15 +58,15 @@ export default function Router() {
           path="/payment/:orderId"
           element={React.createElement(withAuthGuard(Payment))}
         />
+        <Route
+          path="/product"
+          element={React.createElement(withAuthGuard(Product))}
+        />
+        <Route
+          path="/order-history"
+          element={React.createElement(withAuthGuard(OrderHistoryPage))}
+        />
       </Route >
-      <Route
-        path="/product"
-        element={React.createElement(withAuthGuard(Product))}
-      />
-      <Route
-        path="/order-history"
-        element={React.createElement(withAuthGuard(OrderHistoryPage))}
-      />
       <Route path="/admin" element={React.createElement(withAdminGuard(AdminLayout))}>
         <Route path="/admin/products" element={<Products />} />
         <Route path="/admin/addProduct" element={<AddProduct />} />

@@ -63,7 +63,7 @@ const FillUserForm: React.FC<FillUserFormProps> = ({ user }) => {
   }
 };
   return (
-    <Form form={form} layout="vertical" onFinish={handleSubmit}>
+    <Form form={form} layout="vertical" onFinish={handleSubmit} className="modal-form">
       <Row gutter={16}>
         <Col span={12}>
           <Form.Item label="Họ và tên" name="user_fullname">
@@ -88,14 +88,14 @@ const FillUserForm: React.FC<FillUserFormProps> = ({ user }) => {
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item label="Ngày sinh" name="user_birthDate">
+          <Form.Item label="Ngày sinh" name="user_birthDate" >
             <DatePicker className="input-custom" format="YYYY-MM-DD" />
           </Form.Item>
         </Col>
       </Row>
       <Form.Item>
         <Button type="primary" htmlType="submit">
-          OK
+          Xác nhận
         </Button>
       </Form.Item>
     </Form>

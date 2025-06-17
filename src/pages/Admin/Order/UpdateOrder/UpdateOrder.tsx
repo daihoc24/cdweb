@@ -90,7 +90,6 @@ const UpdateOrder: React.FC = () => {
     }
   };
   const editOrderValidate = Yup.object().shape({
-    user_id: Yup.number().required("Vui lòng nhập ID!"),
     status: Yup.string().required("Trạng thái không được để trống!"),
     sonha: Yup.string().required("Số nhà không được để trống!"),
     ward: Yup.string().required("Phường không được để trống!"),
@@ -115,7 +114,6 @@ const UpdateOrder: React.FC = () => {
       enableReinitialize: true,
       initialValues: {
         status: orderDetail?.status || "",
-        user_id: orderDetail?.user_id ?? 0,
         sonha: orderDetail?.address?.split(", ")[0] || "",
         ward: orderDetail?.address?.split(", ")[1] || "",
         district: orderDetail?.address?.split(", ")[2] || "",
@@ -132,7 +130,6 @@ const UpdateOrder: React.FC = () => {
       onSubmit: async (values: any) => {
         const fullAddress = `${values.sonha}, ${values.ward}, ${values.district}, ${values.province}`;
         const formData: updateOrder = {
-          user_id: values.user_id,
           status: values.status,
           address: fullAddress,
           orderProducts: values.orderProducts,
@@ -178,22 +175,6 @@ const UpdateOrder: React.FC = () => {
     >
       <h3 style={{ marginBottom: "20px" }}>Cập nhật đơn hàng</h3>
 
-      <Form.Item label="ID User">
-        <InputNumber
-          onChange={handleChangeInputNumber("user_id")}
-          min={1}
-          max={1000000}
-          value={formik.values.user_id}
-        />
-        {formik.errors.user_id && formik.touched.user_id && (
-          <span
-            className="form-label text-danger"
-            style={{ marginLeft: "10px" }}
-          >
-            {formik.errors.user_id}
-          </span>
-        )}
-      </Form.Item>
       <Form.Item label="Số nhà">
         <Input
           name="sonha"

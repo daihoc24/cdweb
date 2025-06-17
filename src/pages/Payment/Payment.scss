@@ -1,0 +1,48 @@
+.payment-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #f0f2f5;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: #333;
+  }
+
+  .ant-form {
+    width: 100%;
+    max-width: 600px;
+    background: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    .ant-form-item {
+      margin-bottom: 20px;
+
+      .ant-form-item-label {
+        label {
+          font-weight: 500;
+        }
+      }
+    }
+
+    .ant-form-item:last-child {
+      margin-bottom: 0;
+      text-align: right;
+
+      .ant-btn {
+        min-width: 120px;
+      }
+
+      .ant-btn-default {
+        margin-left: 10px;
+      }
+    }
+  }
+}

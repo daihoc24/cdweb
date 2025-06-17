@@ -12,7 +12,7 @@ import { BankAccountsModule } from './bank_accounts/bank_accounts.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true, // Đảm bảo ConfigModule khả dụng trên toàn bộ ứng dụng
+      isGlobal: true, 
     }),
     UserModule,
     AuthModule,

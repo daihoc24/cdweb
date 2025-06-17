@@ -213,6 +213,8 @@ $border-radius-lg: 12px;
 
 // Form in modal
 .modal-form {
+  max-width: 500px;
+  margin: 0 auto;
   .ant-form-item {
     margin-bottom: 20px;
 
@@ -307,4 +309,8 @@ $border-radius-lg: 12px;
       background: rgba(135, 200, 75, 0.5);
     }
   }
+}
+// Ensure DatePicker popup appears above other elements in a modal
+.ant-picker-dropdown {
+  z-index: 1050 !important;
 }
